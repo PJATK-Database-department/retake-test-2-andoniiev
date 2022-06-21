@@ -16,13 +16,19 @@ namespace ApbdTest2.Services
         public DatabaseService(s23005Context dbContext) { 
             _dbContext = dbContext; 
         }
-       /* public async  Task<ICollection<ActionDto>> GetActionsForFireTruckAsync(int id)
+        public async  Task<ICollection<ActionDto>> GetActionsForFireTruckAsync(int id)
         {
             FireTruck firetruck = await _dbContext.FireTrucks.FirstAsync(x => x.IdFireTruck == id);
 
-            return await _dbContext.FireTruckActions.Sele
-                .
-        }*/
+            return await _dbContext.FireTruckActions
+                .OrderByDescending(x => x.IdActionNavigation.EndTime)
+                .Select(x => new ActionDto
+                {
+                    IdAction = x.IdActionNavigation.IdAction,
+                    StartDate = x.IdActionNavigation.StartTime,
+                }).ToListAsync();
+                
+        }
 
         public async Task<FireTruckDto> GetFireTruckAsync(int id)
         {
