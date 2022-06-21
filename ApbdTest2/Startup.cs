@@ -12,6 +12,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ApbdTest2.Services;
+using ApbdTest2.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace ApbdTest2
 {
@@ -27,6 +29,11 @@ namespace ApbdTest2
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<s23005Context>(
+                opt =>
+                {
+                    opt.UseSqlServer(Configuration.GetConnectionString("Default"));
+                });
             services.AddScoped<IDatabaseService, DatabaseService>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
