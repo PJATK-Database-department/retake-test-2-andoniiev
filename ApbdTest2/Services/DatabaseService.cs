@@ -4,6 +4,7 @@ using ApbdTest2.Dto;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Linq;
 
 namespace ApbdTest2.Services
 {
@@ -22,6 +23,17 @@ namespace ApbdTest2.Services
             return await _dbContext.FireTruckActions.Sele
                 .
         }*/
+
+        public async Task<FireTruckDto> GetFireTruckAsync(int id)
+        {
+
+            return (FireTruckDto)_dbContext.FireTrucks.Select(x => new FireTruckDto
+            {
+                IdFireTruck = x.IdFireTruck,
+                OperationalNumber = x.OperationalNumber,
+                SpecialEquipment = x.SpecialEquipment
+            });
+        }
         public async Task UpdateTheEndDateAsync(int idAction,DateTime newDate, ActionDto actionDto)
         {
             var action = await _dbContext.Actions.FirstAsync(x => x.IdAction == idAction);

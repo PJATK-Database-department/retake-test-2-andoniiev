@@ -10,5 +10,7 @@ namespace ApbdTest2.Dto
         public bool SpecialEquipment { get; set; }
 
         List<Action> FireTruckActions { get; set; }
+
+
     }
 }

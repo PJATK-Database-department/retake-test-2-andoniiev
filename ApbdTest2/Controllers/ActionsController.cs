@@ -17,7 +17,7 @@ namespace ApbdTest2.Controllers
         {
             _databaseService = databaseService;
         }
-        [HttpPut("{IdAction}")]
+        [HttpPost("{IdAction}")]
         public async Task<IActionResult>UpdateEndTime([FromRoute] int idAction, [FromRoute] DateTime newDate,[FromBody] ActionDto actionDto)
         {
             if(!await _databaseService.IsActionDateCorrectAsync(idAction, newDate))
